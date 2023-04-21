@@ -43,111 +43,65 @@
               :current-page="currentPage"
             >
 
-              <!-- THEAD CLIENT  -->
 
-            <template #head(expediteur)="data">
-                <div class="pd-table-thead">
-                    <span >{{data.label}}</span>
-                    <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
-                </div>
-              </template>
-
-            <!-- TBODY expediteur  -->
-              <template #cell(expediteur)="data">
-                    <span class="fw-bold" >{{data.item.expediteur.nom}} {{data.item.expediteur.prenoms}}</span>
-              </template>
+            
 
 
-             <!-- THEAD CODE  -->
             <template #head(code)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-              <!-- TBODY CODE  -->
               <template #cell(code)="data">
-                    <span class="green-color-78" >{{data.item.code}}</span>
+                    <span class=" fw-bold" >{{data.item.code}}</span>
               </template>
 
 
-               <!-- THEAD POIDS  -->
-            <template #head(poids)="data">
+              <template #head(minAmount)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-              <!-- TBODY POIDS  -->
-              <template #cell(poids)="data">
-                  <div class="mx-4">
-                    <span class="" >{{data.item.colis[0].poids}}</span>
-
-                  </div>
+              <template #cell(minAmount)="data">
+                    <span class="fw-bold" >{{ Number(data.item.minAmount).toLocaleString() }} Fcfa</span>
               </template>
 
-              <template #cell(createdAt)="data">
-                  <div class="">
-                    <span class="" >{{data.item.createdAt | moment('DD/MM/YYYY')}}</span>
-
-                  </div>
-              </template>
-
-              
-             <!-- THEAD ACTIONs  -->
-             <template #head(nature)="data">
+               <template #head(maxAmount)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-              <template #cell(nature)="data">
-                  <div class="mx-1">
-                    <span class="" >{{data.item.colis[0].typeContenu[0]?data.item.colis[0].typeContenu[0].libelle : ''}}</span>
-
-                  </div>
+              <template #cell(maxAmount)="data">
+                    <span class="fw-bold" >{{ Number(data.item.maxAmount).toLocaleString() }} Fcfa</span>
               </template>
 
-              <!-- THEAD recepteur  -->
-             <template #head(recepteur)="data">
+             
+              <template #cell(creditFeesAmount)="data">
+                    <span class="fw-bold" >{{ Number(data.item.creditFeesAmount).toLocaleString() }} Fcfa</span>
+              </template>
+              <template #cell(interestRate)="data">
+                    <span class="fw-bold green-color-78" >{{ data.item.interestRate }} </span>
+              </template>
+
+
+              <template #head(durationInDays)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-
-               <!-- TBODY recepteur  -->
-              <template #cell(recepteur)="data">
-                    <span class="fw-bold" >{{data.item.recepteur.nom}} {{data.item.recepteur.prenoms}}</span>
+              <template #cell(durationInDays)="data">
+                    <span class="fw-bold blue-color-0f" >{{ data.item.durationInDays }} Jours</span>
               </template>
 
-              <!-- THEAD ETAT DU COLIS  -->
-             <template #head(isPayed)="data">
-                <div class="pd-table-thead">
-                    <span >{{data.label}}</span>
-                    <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
-                </div>
-              </template>
 
-              <!-- TBODY ETAT DU COLIS  -->
-              <template #cell(isPayed)="data">
-                    <!-- <span > <img src="../../assets/icons/green-point.svg" alt=""> </span> -->
-                    <span class="green-color-60 fw-bold mx-2" v-if="data.item.isPayed == true">Payé</span>
-                    <span class="orange-color-df fw-bold mx-2"  v-if="data.item.isPayed == false">En cours</span>
-              </template>
-              
 
-              <!-- THEAD ACTIONs  -->
-             <template #head(actions)="data">
-                <div class="pd-table-thead">
-                    <span >{{data.label}}</span>
-                    <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
-                </div>
-              </template>
                 
-             <!-- TBODY ACTIONs  -->
              <template #cell(actions)="data">
-                 <div class="mx-2">
+                 <div >
                    <img
                    class="d-none"
                   :src="require(`../../assets/icons/${data.item.actions}`)"
@@ -245,43 +199,37 @@ export default {
 
       fields: [
         {
-          key: "expediteur",
-          sortable: true,
-          label: "Client",
-        },
-        {
           key: "code",
           sortable: true,
-          label: "Code",
+          label: "Code du pack",
         },
         {
-          key: "poids",
+          key: "minAmount",
           sortable: true,
-          label: "Poids (Kg)",
+          label: "Montant minimal",
         },
         {
-          key: "createdAt",
+          key: "maxAmount",
           sortable: true,
-          label: "Date",
+          label: "Montant maximal",
         },
         {
-          key: "nature",
+          key: "creditFeesAmount",
           sortable: true,
-          label: "Nature",
+          label: "Frais de dossier",
         },
         {
-          key: "recepteur",
+          key: "interestRate",
           sortable: true,
-          label: "Destinataire",
+          label: "Taux d'intérêt",
         },
         {
-          key: "isPayed",
+          key: "durationInDays",
           sortable: true,
-          label: "Etat du colis",
+          label: "Délai de remboursement ",
         },
         {
           key: "actions",
-          sortable: true,
           label: "Actions",
         },
       ],
@@ -292,17 +240,13 @@ export default {
 
   computed:{
   ...mapGetters([
-      // 'retDateFilterStatus',
-      // 'retAllTransaction',
-      //  'retOneClientTransact',
-      // 'retCurrentUserRole'
+     
 
     ])
 },
   components:{
   },
   created() {
-    // this.getAllProduct = this.$store.state.AllProductList;
     this.show = true;
     setTimeout(() => (this.show = false), 2000);
     
@@ -315,7 +259,6 @@ export default {
     
 
     getAllPackds(e){
-      // console.log("VOIR LE TOUT DES COLIS ", this.retAllTransaction);
       const datas = e;
       for (let i = 0; i < datas.length; i++) {
         datas[i].actions = "more-vertical.svg";
@@ -339,7 +282,19 @@ export default {
   },
 
   deletePack(e){
-    console.log("e", e);
+    return console.log("e", e);
+
+    axios.delete(`${e['@id']}`)
+                 .then(data => {
+                    
+                    console.log("DONNEES REUSSI ", data);
+                    
+                 })
+                 .catch(error => {
+                  
+                    this.show = false;
+                    console.log(error)
+                })
   }
 
 
@@ -406,17 +361,6 @@ export default {
         padding: 2rem 0;
         border-radius: 10px;
 
-        // height: 250px !important;
-        // overflow-y: auto;
-
-        // -ms-overflow-style: none; /* for Internet Explorer, Edge */
-        // scrollbar-width: none; /* for Firefox */
-        // overflow-y: scroll;
-
-        // &::-webkit-scrollbar {
-        //     display: none; /* for Chrome, Safari, and Opera */
-        // }
-
         table{
             border: transparent !important;
             
@@ -424,15 +368,9 @@ export default {
 
             thead {
                 background: #000;color:#f16e01 !important;;
-                // position: sticky;
-                // position: -webkit-sticky;
                 top: 0;
                 z-index: 2;
             }
-
-            // &:hover{
-            //     cursor: pointer;
-            // }
         }
 
         .table > :not(:first-child) {
@@ -459,36 +397,8 @@ export default {
 
     }
 }
-
-// .product-table {
-//   img {
-//     height: auto;
-//     border-radius: 20px;
-//     object-fit: cover !important;
-//   }
-//   td {
-//     cursor: pointer;
-//     border: 2px solid !important;
-//   }
-//   th {
-//     padding: 20px 10px !important;
-//     border: 2px solid !important;
-//   }
-// }
-// .spinner-border {
-//   width: 5rem !important;
-//   font-size: 50px !important;
-//   height: 5rem !important;
-//   color: orange;
-// }
-
-
- 
-
-
-
   .page-item.active .page-link {
-    background: red;
+    background: #ff7901;
     border-color: #fff !important;
 
   }

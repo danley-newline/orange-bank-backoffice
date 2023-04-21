@@ -140,7 +140,9 @@
 <script>
 import TablePacks from '../components/Gestion/TablePacks.vue'
 import DatePick from '../components/Date/ChooseTwoDatePick.vue'
-import axios from "../services/index.js"
+import axios from "../services/index.js";
+import _ from 'lodash';
+
 
 import { mapGetters } from 'vuex'
 
@@ -148,9 +150,26 @@ export default {
   data(){
     return {
       showPackModal: false,
-      packTableDatas:[],
-      detailsDatas:'',
-      globalTransDatas:'',
+      packTableDatas:[
+        {
+          code: "Manuel 1",
+          minAmount: 5000,
+          maxAmount: 150000,
+          creditFeesAmount: 500,
+          interestRate: 1.8,
+          durationInDays: 30,
+        },
+        {
+          code: "Manuel 2",
+          minAmount: 12000,
+          maxAmount: 225000,
+          creditFeesAmount: 500,
+          interestRate: 1.8,
+          durationInDays: 28,
+        },
+
+      ],
+      formAction: "for-creation",
       showSpiner:false,
       periode:'',
 
@@ -182,21 +201,16 @@ export default {
       console.log("ok");
       this.redifinedPacks()
       this.showPackModal = true;
+      this.formAction = "for-creation";
     },
     
     editNewPack(e){
       this.showPackModal = true;
-      this.globalTransDatas = e;
-      this.detailsDatas = e.colis;
+      let getPackClicked = _.cloneDeep(e);
+      this.packs = getPackClicked;
+      this.formAction = "for-edition";
 
-
-      this.packs.code = 'daniel';
-      this.packs.minAmount = 5000;
-      this.packs.maxAmount = 100000;
-      this.packs.creditFeesAmount = 500;
-      this.packs.interestRate = 1.8;
-      this.packs.durationInDays = 30;
-      // console.log("A VOIR colis ", this.detailsDatas);
+      console.log("A VOIR colis ", this.packs);
     },
 
     userDateToParse(e){
@@ -216,34 +230,48 @@ export default {
 
     packsFormSubmit(){
 
-      this.showPackModal = false;
-      return console.log("QUE TAL", this.packs);
+      this.formAction == "for-creation" ? this.postPack() : this.updatePack();
+      
 
+           
+    },
+
+    postPack(){
+      this.showPackModal = false;
+      return console.log("LA CREATION DES DONNNEES ", this.packs);
 
       axios
           .post("/authentication_token", this.packs)
           .then((data) => {
             console.log("Create Pack", data);
-
-            
           })
           .catch((error) => {
-
             console.log("MUY error", error);
+          }); 
+    },
 
-            // if (error.response.status == 401) {
-              
-              
-            // }
+    updatePack(){
+      this.showPackModal = false;
+      return console.log("L'EDITION DES DONNNEES ", this.packs);
 
-          });      
+      axios
+          .put("/authentication_token", this.packs)
+          .then((data) => {
+            console.log("Create Pack", data);
+          })
+          .catch((error) => {
+            console.log("MUY error", error);
+          }); 
     }
+
+
+    
 
   },
 
   mounted(){
-    this.$store.dispatch("getAlltransactions");
-    this.$store.commit("MutFilterStatus", false);
+    // this.$store.dispatch("getAlltransactions");
+    // this.$store.commit("MutFilterStatus", false);
   }
 }
 </script>
