@@ -26,19 +26,9 @@
 
             </div>
             
-          
-        <!-- CE BLOCK DE CODE PERMET DACUTALISER LA  PAGE LORSUE LETAT DE LA VALEUR CHANGE  ET APPELER LA FONCTION SE TROUVANT LE DANS CYCLE DE VIE  DANS LUPDATE  -->
-<p class="invisible"> {{retDateFilterStatus}} IS OK </p>
-<!-- FIN BLOCK  -->
 
           <div class="zone-tables box-shadow-d3">
-            <!-- <div class="d-flex px-4 mb-2 bd-btm-blue-light">
-              <div class="liste-tables pb-2 " :class="{'active' : listActive == i}" 
-              v-for="(item,i) in ListTable" :key="i" @click="ListClass(i), updateTableData(item.entete)">
-                <p>{{item.text}}</p>
-              </div>
-            </div> -->
-
+            
             <b-table
               border
               label-sort-asc=""
@@ -302,10 +292,10 @@ export default {
 
   computed:{
   ...mapGetters([
-      'retDateFilterStatus',
-      'retAllTransaction',
-       'retOneClientTransact',
-      'retCurrentUserRole'
+      // 'retDateFilterStatus',
+      // 'retAllTransaction',
+      //  'retOneClientTransact',
+      // 'retCurrentUserRole'
 
     ])
 },
@@ -317,32 +307,14 @@ export default {
     setTimeout(() => (this.show = false), 2000);
     
   },
-  updated(){
-    setTimeout(() => {
-      this.checkTableFilter();
-    }, 100);
-  },
   methods: {
 
-    reloadPage(){
-      window.location.reload();
-    },
+    showLoader(){
 
+    },
     
-    checkTableFilter(){
-    // retDateFilterStatus RETOURNE TRUE LORSQUE LON FILTRE  LE TABLEAU PAR LES DATES 
-      // console.log("voir le state " , this.retDateFilterStatus);
-      if (this.retDateFilterStatus == true) {
-        this.TableData = [];
-        setTimeout(() => {
-          this.getAllColis(this.TableDatas);
-          this.$store.commit("MutFilterStatus", false);
-        }, 100);
-        ;
-      }
-    },
 
-    getAllColis(e){
+    getAllPackds(e){
       // console.log("VOIR LE TOUT DES COLIS ", this.retAllTransaction);
       const datas = e;
       for (let i = 0; i < datas.length; i++) {
@@ -351,7 +323,7 @@ export default {
       }
       this.TableData = datas;
 
-      // console.log("VOIR LE TOUT DES COLIS ", this.TableData);
+      console.log("VOIR LE TOUT DES COLIS ", this.TableData);
       
     },
 
@@ -362,52 +334,8 @@ export default {
       // this.currentPage = 1;
     },
 
-    showLoader(e){
-    
-    // console.log("VOIR LE ", e);
-    this.show = true;
-
-     axios.get(`/transactions?page=${e}`)
-                 .then(data => {
-                    this.show = false;
-                    this.getAllColis(data.data['hydra:member']);
-                    
-                 })
-                 .catch(error => {
-                  this.$fire({
-                      text: `Nous rencontrons un soucis veuillez réessayer ...`,
-                      type: "error",confirmButtonText:'ok',
-                      timer: 5000,
-                    }); 
-                     this.showSpiner = false;
-                    // console.log("LES ZANIMAUX ZANI ",error)
-                })
-      
-  },
   ListClass(e){
     this.listActive = e;
-  },
-  updateTableData(e){
-    // console.log("voir lequel est clické ",e);
-    switch (e) {
-      case "all_colis":
-        this.filter = "";
-        // this.rows = this.TableData.length;
-        break;
-
-      case "stock":
-        this.filter = "";
-        // this.rows = this.TableData.length;
-        break;
-      
-      case "delivered":
-        this.filter = "";
-        // this.rows = this.TableData.length;
-        break;
-    
-      default:
-        break;
-    }
   },
 
   deletePack(e){
@@ -417,12 +345,11 @@ export default {
 
   },
   mounted() {
-    this.getAllColis(this.retAllTransaction[`hydra:member`]);
-     this.rows = this.retAllTransaction['hydra:totalItems'];
+    setTimeout(() => {
+    this.getAllPackds(this.TableDatas);
+      
+    }, 2000);
 
-    // setTimeout(() => {
-    //   console.log("VOIR LA PERIODE ", this.Periode);
-    // }, 2000);
    
   },
   

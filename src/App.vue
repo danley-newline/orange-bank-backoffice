@@ -80,10 +80,8 @@ export default {
 }
 
 .modal-dialog {
-  max-width: calc(100% - 280px) !important;
-  margin-right: 20px !important;
-  // max-width: calc(100% - 14%) !important;
-  //   margin-right: 4% !important;
+  // max-width: calc(100% - 280px) !important;
+  max-width: 600px !important;
   .titre-prin {
     
     p{
@@ -316,6 +314,16 @@ input[type="search"]::-webkit-search-decoration:hover,
         margin-right: 2rem;
     }
 
+.submit-btn{
+  background: #000000;
+  color: #fff;
+  font-weight: bold;
+  &:hover{
+  background: #f16e01;
+  }
+
+}
+
 .blue-color-0f{
   color: #f16e01;
 }
@@ -457,28 +465,16 @@ color: #78d551;
     font-weight: bold !important;
 }
 
+.form-label-style{
+  label{
+    font-style: italic;
+    font-weight: bold;
+    color: #f16e01;
+    margin: 5px 0;
+  }
 
-
-//ALERT CONFIRMATION SYYLE
-button.swal2-confirm.swal2-styled{
-  color: #3085d6;
-
-  &:before {
-    content: "Oui";
-    color: #fff !important;
-    visibility: visible !important;
-    position: absolute;
-}
-}
-
-.swal2-styled.swal2-cancel{
-  color: #aaa;
-
-  &:before {
-    content: "Annuler";
-    color: #fff !important;
-    visibility: visible !important;
-    position: absolute;
-}
+  .form-div{
+    margin-bottom: 5px;
+  }
 }
 </style>
