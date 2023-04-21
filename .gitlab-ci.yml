@@ -1,0 +1,45 @@
+stages:
+    - build
+    - deploy-dev
+
+build:
+    stage: build
+    image: node:14.19.1
+    script:
+        - echo "Start building App"
+        - npm install # Install all dependencies
+        - npm run build #--prod  Build for prod
+        - echo "Build successfully!"
+    artifacts:
+        paths:
+            - dist
+    only:
+        - master # Only run on deploy branch
+    tags:
+        - contabo
+        - pcp
+deploy_develop:
+    stage: deploy-dev
+    image: ubuntu
+    before_script:
+    - echo $PRIVATE_KEY
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - echo "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/gitlab
+    - chmod 700 ~/.ssh/gitlab
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/gitlab
+    - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+    - apt-get install rsync -y -qq
+    - apt-get install curl -y -qq
+    script:
+        - ssh -i ~/.ssh/gitlab -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP
+        - rm -f "$SERVER_ROOT_FRONT_BASE/service-transit.pariscenterplus.com/"*
+        - echo "$HTACCESS" > dist/.htaccess
+        - echo "$HTML" > dist/index.html
+        - rsync -avz --progress -a -e "ssh" dist/ $SERVER_USER@$SERVER_IP:"$SERVER_ROOT_FRONT_BASE/service-transit.pariscenterplus.com/"
+    tags:
+        - contabo
+        - pcp
+    only:
+        - master # Only run on deploy branch

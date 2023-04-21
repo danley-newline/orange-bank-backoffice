@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.206" height="23.206" viewBox="0 0 23.206 23.206">
+  <g id="dashboard" transform="translate(-2.25 -2.25)">
+    <path id="Tracé_3948" data-name="Tracé 3948" d="M27,23.625h1.658v4.144H27Z" transform="translate(-6.516 -5.628)" fill="#bababa"/>
+    <path id="Tracé_3949" data-name="Tracé 3949" d="M22.5,18h1.658v8.288H22.5Z" transform="translate(-5.332 -4.147)" fill="#bababa"/>
+    <path id="Tracé_3950" data-name="Tracé 3950" d="M10.894,26.288A4.149,4.149,0,0,1,6.75,22.144H8.408a2.486,2.486,0,1,0,2.486-2.486V18a4.144,4.144,0,0,1,0,8.288Z" transform="translate(-1.185 -4.147)" fill="#bababa"/>
+    <path id="Tracé_3951" data-name="Tracé 3951" d="M23.8,2.25H3.908A1.659,1.659,0,0,0,2.25,3.908V23.8a1.659,1.659,0,0,0,1.658,1.658H23.8A1.66,1.66,0,0,0,25.456,23.8V3.908A1.659,1.659,0,0,0,23.8,2.25Zm0,7.459H12.2v-5.8H23.8Zm-13.261-5.8v5.8H3.908v-5.8ZM3.908,23.8V11.367H23.8V23.8Z" fill="#bababa"/>
+  </g>
+</svg>

@@ -1,0 +1,55 @@
+{
+  "name": "pcp-express",
+  "description": "A Vue.js project",
+  "version": "1.0.0",
+  "author": "daniel kacou",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
+    "bootstrap-vue": "^2.22.0",
+    "chart.js": "^2.9.4",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.14",
+    "vue-carousel": "^0.18.0",
+    "vue-chartjs": "^3.4.0",
+    "vue-chartkick": "^0.6.1",
+    "vue-date-pick": "^1.4.1",
+    "vue-moment": "^4.1.0",
+    "vue-router": "^3.5.3",
+    "vue-simple-alert": "^1.1.1",
+    "vue-snotify": "^3.0.4",
+    "vue-toasted": "^1.1.28",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "dotenv": "^16.0.3",
+    "file-loader": "^1.1.4",
+    "html-webpack-plugin": "2.30.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "vue-easy-pie-chart": "^1.0.3",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
