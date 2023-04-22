@@ -7,6 +7,7 @@
               <p class="fw-bold fs-5"> Date</p>
 
               <DatePick @twoDaysEmited="userDateToParse"  />
+
           </div>
 
           <div class="right-block">
@@ -150,7 +151,6 @@ export default {
   data(){
     return {
       showPackModal: false,
-      
       formAction: "for-creation",
       showSpiner:false,
       periode:'',
@@ -221,20 +221,25 @@ export default {
           .then((res) => {
             
             this.showPackModal = false;
-            console.log("Pack Create Pack", res);
-            this.$store.dispatch("getPacksList");
+             setTimeout(() => {
+              location.reload();
+            }, 1500);            
 
-             this.$toasted.success(`${res.data.code} créée avec succèss`, {
-              duration: 3000,
-              theme: 'bubble',
-            });
+            this.$fire({
+                      text: `${res.data.code} Créée avec succès`,
+                      type: "success",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
 
           })
           .catch((error) => {
-             this.$toasted.show(`${error}`, {
-              duration: 4000,
-              theme: 'bubble',
-            });
+            this.$fire({
+                      text: `${error}`,
+                      type: "error",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
           }); 
     },
 
@@ -245,18 +250,25 @@ export default {
           .put(`/product/${this.packs._id}`, this.packs)
           .then((res) => {
             this.showPackModal = false;
-             this.$toasted.success(`${res.data.code} modifié avec succèss`, {
-              duration: 3000,
-              theme: 'bubble',
-            });
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            this.$fire({
+                      text: `${res.data.code} modifié avec succès`,
+                      type: "success",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
 
           })
           .catch((error) => {
-            this.$toasted.show(`${error}`, {
-              duration: 4000,
-              theme: 'bubble',
-            });
-          }); 
+            this.$fire({
+                      text: `${error}`,
+                      type: "error",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                  });
+            }); 
     }
 
 

@@ -283,18 +283,46 @@ export default {
 
   deletePack(e){
     // return console.log("e", e);
+                this.$confirm("Voulez vous suprimer ce produit ?").then(() => {
 
     axios.delete(`/product/${e._id}`)
                  .then(data => {
                     
                     console.log("DONNEES REUSSI ", data);
-                    window.location.reload();
+                    // window.location.reload();
+
+
+                  this.$fire({
+                      text: `Produit Suprimé ...`,
+                      type: "success",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
+
+                     setTimeout(() => {
+                      location.reload();
+                    }, 1500);
                     
                  })
                  .catch(error => {
+
+                  this.$fire({
+                      text: `${error}`,
+                      type: "error",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
                   
                     this.show = false;
                     console.log(error)
+                })
+
+
+
+
+
+
+          
                 })
   }
 
