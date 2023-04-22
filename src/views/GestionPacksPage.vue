@@ -133,7 +133,9 @@
     </b-modal>
 
 
+    
      </b-overlay>
+
   </div>
 </template>
 
@@ -152,8 +154,6 @@ export default {
       formAction: "for-creation",
       showSpiner:false,
       periode:'',
-
-
       packs:{
         code: "",
         minAmount: 0,
@@ -161,12 +161,13 @@ export default {
         creditFeesAmount: 0,
         interestRate: 0,
         durationInDays: 0
-      }
+      },
+
     }
   },
   components:{
     TablePacks,
-    DatePick
+    DatePick,
   },
   computed:{
    ...mapGetters([
@@ -217,14 +218,23 @@ export default {
 
       axios
           .post("/product", this.packs)
-          .then((data) => {
+          .then((res) => {
             
             this.showPackModal = false;
-            console.log("Pack Create Pack", data);
+            console.log("Pack Create Pack", res);
             this.$store.dispatch("getPacksList");
+
+             this.$toasted.success(`${res.data.code} créée avec succèss`, {
+              duration: 3000,
+              theme: 'bubble',
+            });
+
           })
           .catch((error) => {
-            console.log("MUY error", error);
+             this.$toasted.show(`${error}`, {
+              duration: 4000,
+              theme: 'bubble',
+            });
           }); 
     },
 
@@ -233,13 +243,19 @@ export default {
 
       axios
           .put(`/product/${this.packs._id}`, this.packs)
-          .then((data) => {
-            console.log("Create Pack", data);
+          .then((res) => {
             this.showPackModal = false;
+             this.$toasted.success(`${res.data.code} modifié avec succèss`, {
+              duration: 3000,
+              theme: 'bubble',
+            });
 
           })
           .catch((error) => {
-            console.log("MUY error", error);
+            this.$toasted.show(`${error}`, {
+              duration: 4000,
+              theme: 'bubble',
+            });
           }); 
     }
 
