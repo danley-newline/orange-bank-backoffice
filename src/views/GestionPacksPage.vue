@@ -209,21 +209,17 @@ export default {
     },
 
     packsFormSubmit(){
-
       this.formAction == "for-creation" ? this.postPack() : this.updatePack();
-      
-
-           
     },
 
     postPack(){
-      // this.showPackModal = false;
       // return console.log("LA CREATION DES DONNNEES ", this.packs);
 
       axios
           .post("/product", this.packs)
           .then((data) => {
             
+            this.showPackModal = false;
             console.log("Pack Create Pack", data);
             this.$store.dispatch("getPacksList");
           })
@@ -233,13 +229,14 @@ export default {
     },
 
     updatePack(){
-      // this.showPackModal = false;
-      return console.log("L'EDITION DES DONNNEES ", this.packs);
+      // return console.log("L'EDITION DES DONNNEES ", this.packs);
 
       axios
-          .put("/product", this.packs)
+          .put(`/product/${this.packs._id}`, this.packs)
           .then((data) => {
             console.log("Create Pack", data);
+            this.showPackModal = false;
+
           })
           .catch((error) => {
             console.log("MUY error", error);

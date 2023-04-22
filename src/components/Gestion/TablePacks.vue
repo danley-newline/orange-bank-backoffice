@@ -282,12 +282,13 @@ export default {
   },
 
   deletePack(e){
-    return console.log("e", e);
+    // return console.log("e", e);
 
-    axios.delete(`${e['@id']}`)
+    axios.delete(`/product/${e._id}`)
                  .then(data => {
                     
                     console.log("DONNEES REUSSI ", data);
+                    window.location.reload();
                     
                  })
                  .catch(error => {
