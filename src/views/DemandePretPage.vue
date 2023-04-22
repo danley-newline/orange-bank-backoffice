@@ -140,7 +140,7 @@ export default {
         {
           numeroClient:'0708229053',
           montant: 225000,
-          statut: false,
+          isGranted: false,
           created:"2023-04-21",
           limitDate:"2023-05-21",
           amountToRepay:250000,
@@ -156,7 +156,7 @@ export default {
         {
           numeroClient:'0708229053',
           montant: 105000,
-          statut: true,
+          isGranted: true,
           created:"2023-04-18",
           limitDate:"2023-05-10",
           amountToRepay:189000,

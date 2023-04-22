@@ -88,9 +88,9 @@
                     <span class="fw-bold" >{{ Number(data.item.amountToRepay).toLocaleString() }} Fcfa</span>
               </template>
 
-              <template #cell(statut)="data">
-                    <span class="fw-bold text-danger" v-if=" data.item.statut == false"> Rejeté </span>
-                    <span class="fw-bold text-success" v-if=" data.item.statut == true"> Accordé </span>
+              <template #cell(isGranted)="data">
+                    <span class="fw-bold text-danger" v-if=" data.item.isGranted == false"> Rejeté </span>
+                    <span class="fw-bold text-success" v-if=" data.item.isGranted == true"> Accordé </span>
               </template>
                 
              <template #cell(actions)="data">
@@ -205,7 +205,7 @@ export default {
           label: "À rembourser ",
         },
         {
-          key: "statut",
+          key: "isGranted",
           sortable: true,
           label: "Statut",
         },
