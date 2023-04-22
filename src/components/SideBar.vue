@@ -130,106 +130,31 @@ export default {
           icon: "side-vitesse-light.svg",
           blueIcon: "side-vitesse.svg",
           text: "Tableau de bord",
-          roleAdmin: "ROLE_ADMIN",
-          roleCurrent: "DASHBOARD",
-
-          roleColis: "",
-          roleCaisse: "",
-
-          roleCompta: "",
-          roleCommerce: "",
-
           url: "/",
         },
         {
           blueIcon: "colis-blue.svg",
           icon: "colis-light.svg",
           text: "Nos Packs",
-
-          roleAdmin: "ROLE_ADMIN",
-          roleCurrent: "",
-          roleColis: "ROLE_AGENT",
-          roleCaisse: "",
-          roleCompta: "",
-          roleCommerce: "",
-
           url: "/gestion-packs",
         },
         {
           blueIcon: "caisse-icon-blue.svg",
           icon: "caisse-icon.svg",
-          text: "Caisse",
-          roleAdmin: "ROLE_ADMIN",
-          roleCurrent: "",
-
-          roleColis: "",
-          roleCaisse: "ROLE_CAISSE",
-          roleCompta: "",
-          roleCommerce: "",
-
-          url: "/caisse",
+          text: "Demande Credit",
+          url: "/demande-pret",
         },
-        {
-          blueIcon: "client-count-blue.svg",
-          icon: "client-count.svg",
-          text: "Compte client",
-          roleAdmin: "ROLE_ADMIN",
-          roleCurrent: "COMPTE_CLIENT",
-
-          roleColis: "",
-          roleCaisse: "",
-
-          roleCompta: "",
-          roleCommerce: "",
-          url: "/compte-client",
-        },
-        // {
-        //   blueIcon: "compta-blue.svg",
-        //   icon: "compta.svg",
-        //   text: "Comptabilité",
-        //   roleAdmin: "ROLE_ADMIN",
-        //   roleCurrent: "",
-
-        //   roleColis: "",
-        //   roleCaisse: "",
-
-        //   roleCompta: "ROLE_COMPTA",
-        //   roleCommerce: "",
-        //   url: "/comptabilite",
-        // },
-        // {
-        //   blueIcon: "abon-icon.svg",
-        //   icon: "abon-icon.svg",
-        //   text: "Sce commercial",
-        //   roleAdmin: "ROLE_ADMIN",
-        //   roleCurrent: "",
-
-        //   roleColis: "",
-        //   roleCaisse: "",
-
-        //   roleCompta: "",
-        //   roleCommerce: "ROLE_COMMERCIAL",
-        //   url: "/commercial",
-        // },
+        
       ],
       confLinks: [
         {
           blueIcon: "add-client.svg",
           icon: "user.svg",
           text: "Compte admin",
-          roleAdmin: "",
-          roleCurrent: "",
-
           url: "/compte-admin",
         },
       ],
       logoutLinks: [
-        // {
-        //   icon:'lock.svg',
-        //   text:'Verrouiller la session',
-        //   url:'#!',
-        //   color:'text-dark'
-        // },
         {
           icon: "logout-icon.svg",
           text: "Se déconnecter",

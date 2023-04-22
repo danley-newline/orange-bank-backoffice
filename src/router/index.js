@@ -2,9 +2,7 @@ import Vue from 'vue'
 import VueRouter  from 'vue-router'
 import DasboardPage from '../views/DasboardPage.vue'
 import GestionPacksPage from '../views/GestionPacksPage.vue'
-import Caisse from '../views/Caisse.vue'
-import DetailsClient from '../views/DetailsClient.vue'
-import CompteClient from '../views/CompteClient.vue'
+import DemandePretPage from '../views/DemandePretPage.vue'
 import CompteAdmin from '../views/CompteAdmin.vue'
 import Login from '../views/Login.vue'
 
@@ -22,28 +20,17 @@ const routes = [
     {path:'/', 
     component:DasboardPage, 
     name:'dashboard', 
-    meta:{title:'Tableau de bord'}},
+    meta:{title:'Tableau de bord'}
+  },
     {path:'/gestion-packs', 
       component:GestionPacksPage, 
       name:'gestionPacks', 
       meta:{title:'Gestion de packs'},
     },
-    
-    {path:'/caisse', 
-        component:Caisse, 
-        name:'Caisse', 
-        meta:{title:'Caisse'}
-    },
-    {path:'/details-client', 
-        component:DetailsClient, 
-        name:'DetailsClient', 
-        meta:{title:'Détails du client'}
-    },
-    {
-      path:'/compte-client', 
-        component:CompteClient, 
-        name:'CompteClient', 
-        meta:{title:'Compte Client'}
+    {path:'/demande-pret', 
+      component:DemandePretPage, 
+      name:'demandePret', 
+      meta:{title:'Demande de prêt'},
     },
     {
       path:'/login', 

@@ -16,10 +16,9 @@
           </p>
           <p class="user-info">
             <span class="mx-2">
-              <!-- <img src="../assets/icons/alert-icon.svg" alt="" /> -->
             </span>
               Admin
-              {{retcurrentUserlogedInfo.prenoms}} {{retcurrentUserlogedInfo.nom.charAt(0)}} .
+              <!-- {{retcurrentUserlogedInfo.prenoms}} {{retcurrentUserlogedInfo.nom.charAt(0)}} . -->
             
           </p>
 
@@ -36,7 +35,7 @@
           </div>
         </div>
         <div class="user-more-action" :class="{'admin-cursor' : userDropClick == true}" v-if="showDropdown" >
-          <p class="text-capitalize no-allow">Nom: {{retcurrentUserlogedInfo.prenoms}} {{retcurrentUserlogedInfo.nom}}</p>
+          <p class="text-capitalize no-allow">Nom: </p>
           <p @click="goToAccess">Modifier mes accès</p>
           <p @click="logoutUser">Déconnexion</p>
         </div>
@@ -93,19 +92,6 @@ export default {
 
   getInfoFromApi(){
     this.$store.dispatch("getDasboardDatas");
-      this.$store.dispatch("getAllClientData");
-      this.$store.dispatch("getAllPaysData");
-      this.$store.dispatch("getAllAgenceData");
-      this.$store.dispatch("getAllVillesData");
-      this.$store.dispatch("getAllExpModeData");
-      this.$store.dispatch("getAllPayModeData");
-      this.$store.dispatch("getPayFromData");
-      this.$store.dispatch("getTypeFactuData");
-      this.$store.dispatch("ActGetColisClientType");
-      this.$store.dispatch("getTypeContenuData");
-      // this.$store.dispatch("getAllColisData");
-      this.$store.dispatch("getAlltransactions");
-      this.$store.dispatch("getAllInvoicesDatas");
       this.$store.dispatch("getAllAdminUsersData");
       
     },

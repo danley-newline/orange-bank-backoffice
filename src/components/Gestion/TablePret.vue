@@ -2,7 +2,7 @@
   <div class="gestion-table">
     <b-overlay :show="show" rounded="sm" class="product-loader">            
             <div class="d-flex align-items-center ">
-            <h3 class="fw-bold">Liste Des Admins  </h3>
+            <h3 class="fw-bold">Liste Des Demandes de crédit  </h3>
 
             <div class="search-block d-flex box-shadow-d3">
                 <button class="search-btn">
@@ -13,7 +13,7 @@
                  @input="sendForFilterTheTableData(filterTab)"
                 type="search"
                 class="search-input mx-2"
-                placeholder="Rechercher un compte"
+                placeholder="Rechercher une demande"
 
               />
             </div>

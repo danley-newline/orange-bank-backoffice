@@ -37,9 +37,6 @@ export default {
 
   mounted(){
     
-    this.$store.dispatch("getAllUserRoles");
-
-    
   }
 }
 </script>

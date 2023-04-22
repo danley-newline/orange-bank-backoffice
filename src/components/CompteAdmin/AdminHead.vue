@@ -8,12 +8,8 @@
               <!-- <DatePick /> -->
           </div>
           <div class="right-block">
-              <button class="custom-btn box-shadow-d3  text-dark bg-yellow" @click="$router.push('edit-admin-pass')" >
-                   <!-- <img src="../../assets/icons/add-client.svg" class="img-1-5vw" alt=""> -->
-                   <span class="date-text">Modifier mon password</span>
-              </button>
-
-               <button v-if="retCurrentUserRole.roleAdmin == 'ROLE_ADMIN'" class="custom-btn box-shadow-d3  text-dark bg-yellow" @click="$router.push('create-admin')" >
+              
+               <button class="custom-btn box-shadow-d3  text-dark bg-yellow" @click="newAdmin()" >
                    <img src="../../assets/icons/add-client.svg" class="img-1-5vw" alt="">
                    <span class="date-text">Nouveau utilisateur</span>
               </button>
@@ -39,10 +35,15 @@ export default {
   },
   computed: {
     ...mapGetters([
-      
-      'retCurrentUserRole'
+      // 'retCurrentUserRole'
     ])
   },
+
+  methods:{
+    newAdmin(){
+      console.log("SHOW ADMIN MODAL");
+    }
+  }
 };
 </script>
 
