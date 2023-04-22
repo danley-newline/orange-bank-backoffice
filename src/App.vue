@@ -324,7 +324,7 @@ input[type="search"]::-webkit-search-decoration:hover,
 
 }
 
-.blue-color-0f{
+.orange-color-0f{
   color: #f16e01;
 }
 .bg-blue-fort{

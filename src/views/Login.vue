@@ -67,9 +67,9 @@ export default {
 
       if (this.userLog.username !== "" && this.userLog.username !== "") {
         axios
-          .post("/authentication_token", this.userLog)
+          .post("/auth/login", this.userLog)
           .then((data) => {
-            // console.log("UserLog", data);
+            console.log("UserLog", data);
 
             if (data.status === 200) {
 
@@ -77,7 +77,7 @@ export default {
               setAuthHeader(data.data.token)
 
               setTimeout(() => {
-                 this.$store.dispatch("getDasboardDatas");
+                this.$store.commit("MutLogedUser", data.data);
               }, 100);
 
               setTimeout(() => {
@@ -94,7 +94,7 @@ export default {
             // console.log(error);
             // console.log("FIRST ERROR ", error.response.status); // 401
 
-            if (error.response.status == 401) {
+            if (error.response.status == 401 || error.response.status == 404  ) {
               setTimeout(() => {
                 this.showSpiner = false;
                 this.$fire({

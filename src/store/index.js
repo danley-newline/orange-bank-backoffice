@@ -9,10 +9,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state:{
-        currentUserInfo:null,
-        dashDatas:null,
         allAdminUserInfo: null,
         userLogStatus:false,
+        logedUser: null,
+        packList: null
 
 
     }, 
@@ -22,8 +22,9 @@ export default new Vuex.Store({
             state.allAdminUserInfo = payload;
             // console.log('TOUTES LES VALEUR DU CLIENT ' , state.allClientInfo)
          },
-         MutAllDashboardDatas(state, payload){
-            state.dashDatas = payload;
+
+         MutLogedUser(state, payload){
+            state.logedUser = payload;
             // console.log('LES GENS BACK MUT ok ok ', state.dashDatas)
          },
 
@@ -31,6 +32,12 @@ export default new Vuex.Store({
             state.userLogStatus = payload;
             window.location.reload();
          },
+
+         MutPacksList(state, payload){
+            state.packList = payload;
+         },
+
+
 
 
         
@@ -56,26 +63,20 @@ export default new Vuex.Store({
        });
   },
 
+   getPacksList({commit}){
+      axios.get(`/product`)
+      .then((response) => {
+         commit("MutPacksList", response.data.data);
+      })
+      .catch((error) => {
+         // console.log(error);
+         if (error.response.status == 401) {
+         commit("mutLogin", false);
+         localStorage.clear();
+         }
+      });
+   },
 
-     getDasboardDatas({commit}){
-      var afterToday = new Date();
-      afterToday.setDate(afterToday.getDate() + 1);
-      // this.tomorrow = dateOne.toISOString().split('T')[0];
-      const endDate = afterToday.toISOString().split('T')[0];
-      // console.log('LA DATE DE FIN ', endDate);
-
-
-
-      axios.get(`/transactions/dashboards?sartDate=2020-01-01&endDate=${endDate}`)
-           .then(data => {
-            // console.log('LES GENS BACK MUT  ', data.data)
-
-              commit('MutAllDashboardDatas', data.data)
-           })
-           .catch(error => {
-               // console.log(error)
-          })
-  },
 
         
         
@@ -86,6 +87,14 @@ export default new Vuex.Store({
       retcurrentUserlogedInfo(state){
          return state.currentUserInfo || [];
      },
+
+     retLogUser(state){
+      return state.logedUser || [];
+      },
+
+      retpackList(state){
+         return state.packList || [];
+         },
       
     }
 })

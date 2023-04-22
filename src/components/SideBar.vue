@@ -165,22 +165,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["retCurrentUserRole"]),
+    ...mapGetters([
+      ""
+      ]),
   },
   methods: {
-    checkLogUserStatus() {
-      if (this.retCurrentUserRole == "") {
-        this.show = true;
-
-        setTimeout(() => {
-          this.show = false;
-        }, 3000);
-      } else {
-        this.show = false;
-      }
-
-      // console.log("VOIR LA SECONDE ALL ROLES ", this.retCurrentUserRole);
-    },
     checkLinkClass(e) {
       // console.log("voir les elmen", e)
       this.WhichActiveIcon = e;
@@ -218,7 +207,6 @@ export default {
   },
 
   mounted() {
-    this.checkLogUserStatus();
     // VERIFICATION DU SCROLL POUR L'EMPLACEMENT DE L'ICON USER DANS LA NAVBAR
     window.addEventListener("scroll", this.onScroll);
 

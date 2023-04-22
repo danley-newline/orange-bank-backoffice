@@ -94,7 +94,7 @@
                 </div>
               </template>
               <template #cell(durationInDays)="data">
-                    <span class="fw-bold blue-color-0f" >{{ data.item.durationInDays }} Jours</span>
+                    <span class="fw-bold orange-color-0f" >{{ data.item.durationInDays }} Jours</span>
               </template>
 
 

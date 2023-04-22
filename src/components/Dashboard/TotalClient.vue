@@ -18,7 +18,7 @@
               <img src="../../assets/icons/users.svg" class="img-1-5vw"  alt="" />
             </div>
             <div class="my-3">
-              <h2 class="fw-bold blue-color-0f">{{Number(clientNumber).toLocaleString()}}</h2>
+              <h2 class="fw-bold orange-color-0f">{{Number(clientNumber).toLocaleString()}}</h2>
             </div>
             <p class="green-color-78">
               <span><img src="../../assets/icons/grow-graph.svg" alt="" /></span

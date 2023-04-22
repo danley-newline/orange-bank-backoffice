@@ -8,17 +8,17 @@
         </div>
 
         <div class="link-user-info">
-          <p class="green-color-78">
+          <p class="orange-color-0f">
             <span class="mx-2">
               <img src="../assets/icons/location.svg" alt="" />
             </span>
-            Agence Aéroport, Abidjan Côte d'ivoire
+             Abidjan Côte d'ivoire
           </p>
           <p class="user-info">
             <span class="mx-2">
             </span>
               Admin
-              <!-- {{retcurrentUserlogedInfo.prenoms}} {{retcurrentUserlogedInfo.nom.charAt(0)}} . -->
+              {{retLogUser.username}} .
             
           </p>
 
@@ -35,8 +35,7 @@
           </div>
         </div>
         <div class="user-more-action" :class="{'admin-cursor' : userDropClick == true}" v-if="showDropdown" >
-          <p class="text-capitalize no-allow">Nom: </p>
-          <p @click="goToAccess">Modifier mes accès</p>
+          <p >Modifier mes accès</p>
           <p @click="logoutUser">Déconnexion</p>
         </div>
       </header>
@@ -69,8 +68,7 @@ export default {
   computed:{
     
     ...mapGetters([
-      'retcurrentUserlogedInfo',
-      'retCurrentUserRole'
+      'retLogUser'
     ])
   },
 
@@ -82,19 +80,6 @@ export default {
   methods: {
     
 
-    callApiForUserInfo(){
-      this.userTokenDecode = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
-      // console.log("voir le nouveau user Together ", this.userTokenDecode);
-      this.$store.dispatch("getCurrentUserInfo",this.userTokenDecode.id);
-    }
-    
-,
-
-  getInfoFromApi(){
-    this.$store.dispatch("getDasboardDatas");
-      this.$store.dispatch("getAllAdminUsersData");
-      
-    },
 
     logoutUser() {
       this.userDropClick = true;
@@ -106,20 +91,9 @@ export default {
       }, 2000);
      
     },
-    goToAccess(){
-      this.userDropClick = true;
-      setTimeout(() => {
-        this.showDropdown = false;
-        this.userDropClick = false;
-        this.$router.push('edit-admin-pass')
-      }, 2000);
-    
-    }
 
   },
   mounted(){
-    this.getInfoFromApi();
-    this.callApiForUserInfo();
   },
 };
 </script>

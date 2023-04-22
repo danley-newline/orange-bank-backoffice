@@ -19,7 +19,7 @@
       </div>
       </div>
       <div class="table-colis mt-5">
-        <TablePacks :TableDatas="packTableDatas" :Periode="periode" @seeMore="editNewPack" />
+        <TablePacks :TableDatas="retpackList" :Periode="periode" @seeMore="editNewPack" />
       </div>
 
 
@@ -142,33 +142,13 @@ import TablePacks from '../components/Gestion/TablePacks.vue'
 import DatePick from '../components/Date/ChooseTwoDatePick.vue'
 import axios from "../services/index.js";
 import _ from 'lodash';
-
-
 import { mapGetters } from 'vuex'
 
 export default {
   data(){
     return {
       showPackModal: false,
-      packTableDatas:[
-        {
-          code: "Manuel 1",
-          minAmount: 5000,
-          maxAmount: 150000,
-          creditFeesAmount: 500,
-          interestRate: 1.8,
-          durationInDays: 30,
-        },
-        {
-          code: "Manuel 2",
-          minAmount: 12000,
-          maxAmount: 225000,
-          creditFeesAmount: 500,
-          interestRate: 1.8,
-          durationInDays: 28,
-        },
-
-      ],
+      
       formAction: "for-creation",
       showSpiner:false,
       periode:'',
@@ -190,7 +170,7 @@ export default {
   },
   computed:{
    ...mapGetters([
-      'retAllTransaction',
+      'retpackList',
     ]),
     
   },
@@ -237,13 +217,15 @@ export default {
     },
 
     postPack(){
-      this.showPackModal = false;
-      return console.log("LA CREATION DES DONNNEES ", this.packs);
+      // this.showPackModal = false;
+      // return console.log("LA CREATION DES DONNNEES ", this.packs);
 
       axios
-          .post("/authentication_token", this.packs)
+          .post("/product", this.packs)
           .then((data) => {
-            console.log("Create Pack", data);
+            
+            console.log("Pack Create Pack", data);
+            this.$store.dispatch("getPacksList");
           })
           .catch((error) => {
             console.log("MUY error", error);
@@ -251,11 +233,11 @@ export default {
     },
 
     updatePack(){
-      this.showPackModal = false;
+      // this.showPackModal = false;
       return console.log("L'EDITION DES DONNNEES ", this.packs);
 
       axios
-          .put("/authentication_token", this.packs)
+          .put("/product", this.packs)
           .then((data) => {
             console.log("Create Pack", data);
           })
@@ -270,7 +252,7 @@ export default {
   },
 
   mounted(){
-    // this.$store.dispatch("getAlltransactions");
+    this.$store.dispatch("getPacksList");
     // this.$store.commit("MutFilterStatus", false);
   }
 }

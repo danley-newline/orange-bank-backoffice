@@ -4,7 +4,7 @@
 import axios from 'axios'
 
 //FOR DEV 
-const getUrl = "https://api-pcp.novate-digital.com";
+const getUrl = "http://localhost:8800/api";
 
 //FOR PROD
 // const getUrl = "https://api-pcp.novate-digital.com";
