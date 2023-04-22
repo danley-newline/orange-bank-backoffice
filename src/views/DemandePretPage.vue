@@ -19,7 +19,7 @@
       </div>
       </div>
       <div class="table-colis mt-5">
-        <TablePret :TableDatas="creditTablesDatas" :Periode="periode" />
+        <TablePret :TableDatas="retcreditList" :Periode="periode" />
       </div>
 
 
@@ -47,7 +47,7 @@
                   <input
                     type="tel"
                     class="form-control"
-                    v-model="credit.numero"
+                    v-model="credit.numeroClient"
                     placeholder="tel: 0707070707"
                     required
                     maxlength="10"
@@ -76,7 +76,7 @@
                 <label for="">Pack <span class="text-danger">*</span></label>
                   <div class="input-group">
                     <select class="form-select" aria-label="Default select example" required  v-model="credit.pack">
-                      <option v-for="(item,i) in getCreditSelect" :key="i" :value="item">{{item.code}}</option>
+                      <option v-for="(item,i) in retpackList" :key="i" :value="item">{{item.code}}</option>
                     </select>
                   </div>
               </div>
@@ -109,7 +109,7 @@ import TablePret from '../components/Gestion/TablePret.vue'
 import DatePick from '../components/Date/ChooseTwoDatePick.vue'
 import axios from "../services/index.js";
 import _ from 'lodash';
-
+import moment from "moment"
 
 import { mapGetters } from 'vuex'
 
@@ -117,66 +117,11 @@ export default {
   data(){
     return {
       showCreditModal: false,
-      getCreditSelect:[
-        {
-          code: "Manuel 1",
-          minAmount: 5000,
-          maxAmount: 150000,
-          creditFeesAmount: 500,
-          interestRate: 1.8,
-          durationInDays: 30,
-        },
-        {
-          code: "Manuel 2",
-          minAmount: 12000,
-          maxAmount: 225000,
-          creditFeesAmount: 500,
-          interestRate: 1.8,
-          durationInDays: 28,
-        },
-      ],
-
-      creditTablesDatas:[
-        {
-          numeroClient:'0708229053',
-          montant: 225000,
-          isGranted: false,
-          created:"2023-04-21",
-          limitDate:"2023-05-21",
-          amountToRepay:250000,
-          pack:{
-            code: "Manuel 1",
-            minAmount: 5000,
-            maxAmount: 150000,
-            creditFeesAmount: 500,
-            interestRate: 1.8,
-            durationInDays: 30,
-          }
-        },
-        {
-          numeroClient:'0708229053',
-          montant: 105000,
-          isGranted: true,
-          created:"2023-04-18",
-          limitDate:"2023-05-10",
-          amountToRepay:189000,
-          pack:{
-            code: "Manuel 1",
-            minAmount: 5000,
-            maxAmount: 150000,
-            creditFeesAmount: 500,
-            interestRate: 1.8,
-            durationInDays: 30,
-          }
-        },
-      ],
       showSpiner:false,
       periode:'',
-
-
       credit:{
         pack:'',
-        numero: '',
+        numeroClient: '',
         montant: '',
       }
     }
@@ -187,7 +132,8 @@ export default {
   },
   computed:{
    ...mapGetters([
-      'retAllTransaction',
+      'retcreditList',
+      'retpackList'
     ]),
     
   },
@@ -207,23 +153,34 @@ export default {
 
     redifinedCredit(){
 
-      this.credit.numero = '';
+      this.credit.numeroClient = '';
       this.credit.montant = '';
       this.credit.pack = '';
 
     },
 
     creditFormSubmit(){
-
       
       this.showCreditModal = false;
       delete this.credit.pack.actions;
-      return console.log("LA CREATION DES DONNNEES ", this.credit);
+
+      const today = new Date();
+      const limitDate = moment(today).add(this.credit.pack.durationInDays, 'days').format('YYYY-MM-DD');
+      const toRepay = this.credit.montant + (this.credit.pack.interestRate * this.credit.montant) / 100 + this.credit.pack.creditFeesAmount;
+
+      let subscribeCredit = {
+        numeroClient: this.credit.numeroClient,
+        montant: this.credit.montant,
+        limitDate: limitDate,
+        amountToRepay: toRepay,
+        productId: this.credit.pack._id
+      }
+
 
       axios
-          .post("/authentication_token", this.credit)
-          .then((data) => {
-            console.log("Create Pack", data);
+          .post("/credit", subscribeCredit)
+          .then((res) => {
+            console.log("Pret souscrit ", res);
           })
           .catch((error) => {
             console.log("MUY error", error);
@@ -237,8 +194,8 @@ export default {
   },
 
   mounted(){
-    // this.$store.dispatch("getAlltransactions");
-    // this.$store.commit("MutFilterStatus", false);
+    this.$store.dispatch("getCreditList");
+    this.$store.dispatch("getPacksList");
   }
 }
 </script>

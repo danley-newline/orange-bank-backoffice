@@ -12,7 +12,8 @@ export default new Vuex.Store({
         allAdminUserInfo: null,
         userLogStatus:false,
         logedUser: null,
-        packList: null
+        packList: null,
+        creditList: null
 
 
     }, 
@@ -35,6 +36,10 @@ export default new Vuex.Store({
 
          MutPacksList(state, payload){
             state.packList = payload;
+         },
+
+         MutCreditList(state, payload){
+            state.creditList = payload;
          },
 
 
@@ -77,6 +82,22 @@ export default new Vuex.Store({
       });
    },
 
+   getCreditList({commit}){
+      axios.get(`/credit`)
+      .then((response) => {
+
+         console.log(response.data.data);
+         commit("MutCreditList", response.data.data);
+      })
+      .catch((error) => {
+         // console.log(error);
+         if (error.response.status == 401) {
+         commit("mutLogin", false);
+         localStorage.clear();
+         }
+      });
+   },
+
 
         
         
@@ -94,7 +115,12 @@ export default new Vuex.Store({
 
       retpackList(state){
          return state.packList || [];
-         },
+      },
+
+      retcreditList(state){
+         return state.creditList || [];
+      },
+      
       
     }
 })

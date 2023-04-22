@@ -266,7 +266,6 @@ export default {
       }
       this.TableData = datas;
 
-      console.log("VOIR LE TOUT DES COLIS ", this.TableData);
       
     },
 

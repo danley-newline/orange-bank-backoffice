@@ -63,22 +63,22 @@
                 </div>
               </template>
               <template #cell(code)="data">
-                    <span class=" fw-bold" >{{data.item.pack.code}}</span>
+                    <span class=" fw-bold" >{{data.item.product.code}}</span>
               </template>
 
                <template #cell(codeMaximal)="data">
-                    <span class="fw-bold" >{{ Number(data.item.pack.maxAmount).toLocaleString() }} Fcfa</span>
+                    <span class="fw-bold" >{{ Number(data.item.product.maxAmount).toLocaleString() }} Fcfa</span>
               </template>
 
 
-              <template #head(created)="data">
+              <template #head(createdAt)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-              <template #cell(created)="data">
-                    <span class="fw-bold" >{{ data.item.created | moment(`DD/MM/YYYY`) }} </span>
+              <template #cell(createdAt)="data">
+                    <span class="fw-bold" >{{ data.item.createdAt | moment(`DD/MM/YYYY`) }} </span>
               </template>
               <template #cell(limitDate)="data">
                     <span class="fw-bold" >{{ data.item.limitDate | moment(`DD/MM/YYYY`) }} </span>
@@ -102,7 +102,7 @@
                 />
                   
                   
-                  <span class="delete-action hover-cursor mx-3" @click="deletePack(data.item)">
+                  <span class="delete-action hover-cursor mx-3" @click="deleteproduct(data.item)">
                      <img
                   src="../../assets/icons/delete.svg"
                   alt=""
@@ -190,7 +190,7 @@ export default {
           label: "Prêt maximal",
         },
         {
-          key: "created",
+          key: "createdAt",
           sortable: true,
           label: "Soumis le",
         },
@@ -229,11 +229,6 @@ export default {
 },
   components:{
   },
-  created() {
-    this.show = true;
-    setTimeout(() => (this.show = false), 2000);
-    
-  },
   methods: {
 
     showLoader(){
@@ -241,7 +236,7 @@ export default {
     },
     
 
-    getAllPackds(e){
+    getAllproductds(e){
       const datas = e;
       for (let i = 0; i < datas.length; i++) {
         datas[i].actions = "more-vertical.svg";
@@ -249,7 +244,7 @@ export default {
       }
       this.TableData = datas;
 
-      console.log("VOIR LE TOUT DES COLIS ", this.TableData);
+      this.show = false;
       
     },
 
@@ -260,7 +255,7 @@ export default {
       // this.currentPage = 1;
     },
     
-  deletePack(e){
+  deleteproduct(e){
     return console.log("e", e);
 
     axios.delete(`${e['@id']}`)
@@ -280,8 +275,10 @@ export default {
   },
 
   mounted() {
+
+    this.show = true;
     setTimeout(() => {
-    this.getAllPackds(this.TableDatas);
+    this.getAllproductds(this.TableDatas);
       
     }, 2000);
 
