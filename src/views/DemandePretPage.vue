@@ -142,7 +142,7 @@ export default {
 
     createNewPack(){
       console.log("ok");
-      this.redifinedCredit()
+      this.initCredit()
       this.showCreditModal = true;
     },
     
@@ -151,7 +151,7 @@ export default {
       console.log("LES DATES ", e);
     },
 
-    redifinedCredit(){
+    initCredit(){
 
       this.credit.numeroClient = '';
       this.credit.montant = '';

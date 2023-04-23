@@ -50,37 +50,20 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      userTokenDecode: "",
-      userRole:"",
       showDropdown:false,
       userDropClick:false,
       
     };
   },
 
-  created() {
-    //DECODE TOKEN 
-    // this.userTokenDecode = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
-    // console.log("voir le nouveau user Together ", this.userTokenDecode);
-    // this.getCurrentUserInfo(this.userTokenDecode.id);
-  },
 
   computed:{
-    
     ...mapGetters([
       'retLogUser'
     ])
   },
 
-  components: {},
-  updated(){
-    // console.log("LUSER CONNECTÉ", this.retcurrentUserlogedInfo);
-  },
-
   methods: {
-    
-
-
     logoutUser() {
       this.userDropClick = true;
       setTimeout(() => {

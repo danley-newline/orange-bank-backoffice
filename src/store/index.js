@@ -9,18 +9,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state:{
-        allAdminUserInfo: null,
         userLogStatus:false,
         logedUser: null,
         packList: null,
-        creditList: null
+        creditList: null,
+        adminUser: null,
 
 
     }, 
     mutations:{
       
-         mutAdminUserInfo(state, payload){
-            state.allAdminUserInfo = payload;
+         MutAdminUser(state, payload){
+            state.adminUser = payload;
             // console.log('TOUTES LES VALEUR DU CLIENT ' , state.allClientInfo)
          },
 
@@ -51,30 +51,12 @@ export default new Vuex.Store({
         
 
 
-
-     getAllAdminUsersData({commit}){
-      axios.get(`/users`)
-      .then((data) => {
-         // console.log('Get the current user login ',data);
-         commit("mutAdminUserInfo", data.data);
- 
-       })
-       .catch((error) => {
-         // console.log(error);
-         if (error.response.status == 401) {
-           commit("mutLogin", false);
-           localStorage.clear();
-         }
-       });
-  },
-
    getPacksList({commit}){
       axios.get(`/product`)
       .then((response) => {
          commit("MutPacksList", response.data.data);
       })
       .catch((error) => {
-         // console.log(error);
          if (error.response.status == 401) {
          commit("mutLogin", false);
          localStorage.clear();
@@ -85,9 +67,22 @@ export default new Vuex.Store({
    getCreditList({commit}){
       axios.get(`/credit`)
       .then((response) => {
+         commit("MutCreditList", response.data.data);
+      })
+      .catch((error) => {
+         if (error.response.status == 401) {
+         commit("mutLogin", false);
+         localStorage.clear();
+         }
+      });
+   },
+
+   getUserList({commit}){
+      axios.get(`/users`)
+      .then((response) => {
 
          console.log(response.data.data);
-         commit("MutCreditList", response.data.data);
+         commit("MutAdminUser", response.data.data);
       })
       .catch((error) => {
          // console.log(error);
@@ -104,11 +99,6 @@ export default new Vuex.Store({
     },
 
     getters: {
-      
-      retcurrentUserlogedInfo(state){
-         return state.currentUserInfo || [];
-     },
-
      retLogUser(state){
       return state.logedUser || [];
       },
@@ -120,6 +110,10 @@ export default new Vuex.Store({
       retcreditList(state){
          return state.creditList || [];
       },
+
+      retadminUser(state){
+         return state.adminUser || [];
+      }, 
       
       
     }

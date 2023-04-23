@@ -20,7 +20,7 @@
       </div>
       </div>
       <div class="table-colis mt-5">
-        <TablePacks :TableDatas="retpackList" :Periode="periode" @seeMore="editNewPack" />
+        <TablePacks :TableDatas="retpackList" :Periode="periode" @seeMore="editPack" />
       </div>
 
 
@@ -180,25 +180,23 @@ export default {
 
     createNewPack(){
       console.log("ok");
-      this.redifinedPacks()
+      this.initPacks()
       this.showPackModal = true;
       this.formAction = "for-creation";
     },
     
-    editNewPack(e){
+    editPack(e){
       this.showPackModal = true;
       let getPackClicked = _.cloneDeep(e);
       this.packs = getPackClicked;
       this.formAction = "for-edition";
-
-      console.log("A VOIR colis ", this.packs);
     },
 
     userDateToParse(e){
       console.log("LES DATES ", e);
     },
 
-    redifinedPacks(){
+    initPacks(){
 
       this.packs.code = '';
       this.packs.minAmount = 0;
@@ -214,8 +212,6 @@ export default {
     },
 
     postPack(){
-      // return console.log("LA CREATION DES DONNNEES ", this.packs);
-
       axios
           .post("/product", this.packs)
           .then((res) => {
@@ -244,8 +240,6 @@ export default {
     },
 
     updatePack(){
-      // return console.log("L'EDITION DES DONNNEES ", this.packs);
-
       axios
           .put(`/product/${this.packs._id}`, this.packs)
           .then((res) => {
@@ -278,7 +272,6 @@ export default {
 
   mounted(){
     this.$store.dispatch("getPacksList");
-    // this.$store.commit("MutFilterStatus", false);
   }
 }
 </script>

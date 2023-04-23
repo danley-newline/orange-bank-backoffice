@@ -13,7 +13,7 @@
                  @input="sendForFilterTheTableData(filterTab)"
                 type="search"
                 class="search-input mx-2"
-                placeholder="Rechercher un compte"
+                placeholder="Rechercher un admin"
 
               />
             </div>
@@ -52,47 +52,23 @@
               </template>
 
 
-              <template #cell(montant)="data">
-                    <span class="fw-bold" >{{ Number(data.item.montant).toLocaleString() }} Fcfa</span>
-              </template>
 
-            <template #head(code)="data">
+            <template #head(username)="data">
                 <div class="pd-table-thead">
                     <span >{{data.label}}</span>
                     <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
                 </div>
               </template>
-              <template #cell(code)="data">
-                    <span class=" fw-bold" >{{data.item.pack.code}}</span>
-              </template>
-
-               <template #cell(codeMaximal)="data">
-                    <span class="fw-bold" >{{ Number(data.item.pack.maxAmount).toLocaleString() }} Fcfa</span>
+              <template #cell(username)="data">
+                    <span class=" fw-bold" >{{data.item.username}}</span>
               </template>
 
 
-              <template #head(created)="data">
-                <div class="pd-table-thead">
-                    <span >{{data.label}}</span>
-                    <span class="mx-2"> <img src="../../assets/icons/sort.svg" alt=""> </span>
-                </div>
-              </template>
-              <template #cell(created)="data">
-                    <span class="fw-bold" >{{ data.item.created | moment(`DD/MM/YYYY`) }} </span>
-              </template>
-              <template #cell(limitDate)="data">
-                    <span class="fw-bold" >{{ data.item.limitDate | moment(`DD/MM/YYYY`) }} </span>
+              <template #cell(email)="data">
+                    <span class=" fw-bold" >{{data.item.email}}</span>
               </template>
 
-              <template #cell(amountToRepay)="data">
-                    <span class="fw-bold" >{{ Number(data.item.amountToRepay).toLocaleString() }} Fcfa</span>
-              </template>
 
-              <template #cell(statut)="data">
-                    <span class="fw-bold text-danger" v-if=" data.item.statut == false"> Rejeté </span>
-                    <span class="fw-bold text-success" v-if=" data.item.statut == true"> Accordé </span>
-              </template>
-                
              <template #cell(actions)="data">
                  <div >
                    <img
@@ -102,11 +78,11 @@
                 />
                   
                   
-                  <span class="delete-action hover-cursor mx-3" @click="deletePack(data.item)">
+                 <span class="hover-cursor mx-2" @click="$emit('seeMore', data.item)">
                      <img
-                  src="../../assets/icons/delete.svg"
+                  src="../../assets/icons/edit_compta.svg"
                   alt=""
-                  class="img-1vw"
+                  class="img-1-2vw"
                 />
                    </span>
 
@@ -168,49 +144,15 @@ export default {
       fields: [
        
         {
-          key: "numeroClient",
+          key: "username",
           sortable: true,
-          label: "Numéro du client",
+          label: "Nom d'utilisateur",
         },
         {
-          key: "montant",
+          key: "email",
           sortable: true,
-          label: "Crédit",
+          label: "Adresse mail",
         },
-
-         {
-          key: "code",
-          sortable: true,
-          label: "Produit choisit",
-        },
-
-        {
-          key: "codeMaximal",
-          sortable: true,
-          label: "Prêt maximal",
-        },
-        {
-          key: "created",
-          sortable: true,
-          label: "Soumis le",
-        },
-        {
-          key: "limitDate",
-          sortable: true,
-          label: "Date écheance",
-        },
-        {
-          key: "amountToRepay",
-          sortable: true,
-          label: "À rembourser ",
-        },
-        {
-          key: "statut",
-          sortable: true,
-          label: "Statut",
-        },
-
-
         {
           key: "actions",
           label: "Actions",
@@ -220,15 +162,7 @@ export default {
       
     };
   },
-
-  computed:{
-  ...mapGetters([
-     
-
-    ])
-},
-  components:{
-  },
+  
   created() {
     this.show = true;
     setTimeout(() => (this.show = false), 2000);
@@ -237,7 +171,6 @@ export default {
   methods: {
 
     showLoader(){
-
     },
     
 
@@ -248,9 +181,6 @@ export default {
         
       }
       this.TableData = datas;
-
-      console.log("VOIR LE TOUT DES COLIS ", this.TableData);
-      
     },
 
 
@@ -260,21 +190,6 @@ export default {
       // this.currentPage = 1;
     },
     
-  deletePack(e){
-    return console.log("e", e);
-
-    axios.delete(`${e['@id']}`)
-                 .then(data => {
-                    
-                    console.log("DONNEES REUSSI ", data);
-                    
-                 })
-                 .catch(error => {
-                  
-                    this.show = false;
-                    console.log(error)
-                })
-  }
 
 
   },
