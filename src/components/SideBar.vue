@@ -141,7 +141,7 @@ export default {
         {
           blueIcon: "caisse-icon-blue.svg",
           icon: "caisse-icon.svg",
-          text: "Demande Credit",
+          text: "Demande de prêt",
           url: "/demande-pret",
         },
         

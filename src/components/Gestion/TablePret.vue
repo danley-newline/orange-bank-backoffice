@@ -2,7 +2,7 @@
   <div class="gestion-table">
     <b-overlay :show="show" rounded="sm" class="product-loader">            
             <div class="d-flex align-items-center ">
-            <h3 class="fw-bold">Liste Des Demandes de crédit  </h3>
+            <h3 class="fw-bold"> ( {{TableData.length}} ) Demandes </h3>
 
             <div class="search-block d-flex box-shadow-d3">
                 <button class="search-btn">
@@ -102,7 +102,7 @@
                 />
                   
                   
-                  <span class="delete-action hover-cursor mx-3" @click="deleteproduct(data.item)">
+                  <span class="delete-action hover-cursor mx-3" @click="deleteDemande(data.item)">
                      <img
                   src="../../assets/icons/delete.svg"
                   alt=""
@@ -175,7 +175,7 @@ export default {
         {
           key: "montant",
           sortable: true,
-          label: "Crédit démandé",
+          label: "Crédit demandé",
         },
 
          {
@@ -232,7 +232,10 @@ export default {
   methods: {
 
     showLoader(){
-
+      this.show = true;
+      setTimeout(() => {
+      this.show = false;
+      }, 2000);
     },
     
 
@@ -255,20 +258,40 @@ export default {
       // this.currentPage = 1;
     },
     
-  deleteproduct(e){
-    return console.log("e", e);
+  deleteDemande(e){
+    // return console.log("e", e);
 
-    axios.delete(`${e['@id']}`)
-                 .then(data => {
+    this.$confirm("Voulez vous suprimer cette demande ?").then(() => {
+      this.show = true;
+    axios.delete(`/credit/${e._id}`)
+                 .then(res => {
                     
-                    console.log("DONNEES REUSSI ", data);
+                    this.$fire({
+                      text: `Demande suprimé....`,
+                      type: "success",
+                      confirmButtonText:'ok',
+                      timer: 2000,
+                    });
+
+                    this.show = false;
+
+                     setTimeout(() => {
+                      location.reload();
+                    }, 2000);
                     
                  })
                  .catch(error => {
+
+                    this.$fire({
+                      text: `${error}`,
+                      type: "error",
+                      confirmButtonText:'ok',
+                      timer: 2000,
+                    });
                   
                     this.show = false;
-                    console.log(error)
                 })
+              })
   }
 
 

@@ -283,24 +283,21 @@ export default {
   deletePack(e){
     // return console.log("e", e);
                 this.$confirm("Voulez vous suprimer ce produit ?").then(() => {
-
+                this.show = true;
     axios.delete(`/product/${e._id}`)
-                 .then(data => {
-                    
-                    console.log("DONNEES REUSSI ", data);
-                    // window.location.reload();
-
-
+                 .then(res => {
                   this.$fire({
                       text: `Produit Suprimé ...`,
                       type: "success",
                       confirmButtonText:'ok',
-                      timer: 5000,
+                      timer: 2000,
                     });
 
                      setTimeout(() => {
                       location.reload();
-                    }, 1500);
+                    }, 2000);
+
+                    this.show = false;
                     
                  })
                  .catch(error => {
@@ -313,7 +310,6 @@ export default {
                     });
                   
                     this.show = false;
-                    console.log(error)
                 })
 
 
