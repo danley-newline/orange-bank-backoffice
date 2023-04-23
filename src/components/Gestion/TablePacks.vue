@@ -270,7 +270,6 @@ export default {
     },
 
 
-
     onFiltered(filteredItems) {
       // this.rows = filteredItems.length;
       // this.currentPage = 1;
