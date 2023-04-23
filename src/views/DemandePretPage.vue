@@ -160,7 +160,7 @@ export default {
     },
 
     creditFormSubmit(){
-      
+
       this.showCreditModal = false;
       delete this.credit.pack.actions;
 
@@ -181,9 +181,38 @@ export default {
           .post("/credit", subscribeCredit)
           .then((res) => {
             console.log("Pret souscrit ", res);
+
+            if (res.data.isGranted == true) {
+             this.$fire({
+                      text: `Cher client, votre crédit est accordé. \n 
+                        Vous devez le rembourser au plus tard le ${ moment(res.data.limitDate).format('DD-MM-YYYY')} . \n
+                        Le montant à rembourser est de ${Number(res.data.amountToRepay).toLocaleString()} FCFA.`,
+                      type: "success",
+                      confirmButtonText:'ok',
+                    });
+            }
+            else
+            {
+              this.$fire({
+                      text: `Cher client vous ne pouvez pas prendre ce crédit de ${Number(res.data.montant).toLocaleString()} FCFA , \n
+                            parce que le montant maximal offert par le pack ${res.data.product.code} est de ${Number(res.data.product.maxAmount).toLocaleString()} FCFA`,
+                      type: "warning",
+                      confirmButtonText:'ok',
+                    });
+            }
+
+              setTimeout(() => {
+                      location.reload();
+                    }, 15000);
+
           })
           .catch((error) => {
-            console.log("MUY error", error);
+            this.$fire({
+                      text: `${error}`,
+                      type: "error",
+                      confirmButtonText:'ok',
+                      timer: 5000,
+                    });
           }); 
            
     },

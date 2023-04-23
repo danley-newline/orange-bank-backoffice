@@ -175,7 +175,7 @@ export default {
         {
           key: "montant",
           sortable: true,
-          label: "Crédit",
+          label: "Crédit démandé",
         },
 
          {
