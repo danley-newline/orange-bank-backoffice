@@ -6,8 +6,8 @@
         <div class="block-images">
         <img src="../assets/images/isaac-smith.jpg" alt="">
         </div>
+        <p class="stats-block">{{retpackList.length}}</p>
         <p class="title-block">Total packs</p>
-        <p class="stats-block">10</p>
       </div>
       <div class="dash-slide all-pret">
         <div class="block-images">
@@ -15,8 +15,8 @@
         
         <img src="../assets/images/towfiqu-barbhuiya.jpg" alt="">
         </div>
+        <p class="stats-block">{{retcreditList.length}}</p>
         <p class="title-block">Demande de prêt</p>
-        <p class="stats-block">10</p>
       </div>
       <div class="dash-slide pret-success">
         <div class="block-images">
@@ -24,8 +24,8 @@
         
         <img src="../assets/images/le-buzz-studio.jpg" alt="">
         </div>
+        <p class="stats-block">{{retcreditAccepted.length}}</p>
         <p class="title-block">Prêt accordé</p>
-        <p class="stats-block">10</p>
       </div>
       <div class="dash-slide pret-error">
         <div class="block-images">
@@ -33,8 +33,9 @@
         
         <img src="../assets/images/steve-johnson.jpg" alt="">
         </div>
+
+        <p class="stats-block">{{retcreditRejected.length}}</p>
         <p class="title-block">Prêt Rejeté</p>
-        <p class="stats-block">10</p>
       </div>
 
     </div>
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data(){
     return{
@@ -50,9 +53,17 @@ export default {
     }
   },
   computed:{
+   ...mapGetters([
+      'retpackList',
+      'retcreditList',
+      'retcreditAccepted',
+      'retcreditRejected'
 
+    ]),
   },
   mounted(){
+    this.$store.dispatch("getPacksList");
+    this.$store.dispatch("getCreditList");
 
   }
 
