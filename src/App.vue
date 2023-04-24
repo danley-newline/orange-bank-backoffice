@@ -39,7 +39,6 @@ export default {
   methods:{
     callSideBar(e){
       this.visible = e;
-      console.log("voyons comment",e)
     },
   },
   components:{

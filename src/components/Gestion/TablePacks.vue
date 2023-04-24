@@ -280,7 +280,6 @@ export default {
   },
 
   deletePack(e){
-    // return console.log("e", e);
                 this.$confirm("Voulez vous suprimer ce produit ?").then(() => {
                 this.show = true;
     axios.delete(`/product/${e._id}`)

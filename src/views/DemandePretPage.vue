@@ -141,14 +141,12 @@ export default {
 
 
     createNewPack(){
-      console.log("ok");
       this.initCredit()
       this.showCreditModal = true;
     },
     
     
     userDateToParse(e){
-      console.log("LES DATES ", e);
     },
 
     initCredit(){
@@ -180,7 +178,6 @@ export default {
       axios
           .post("/credit", subscribeCredit)
           .then((res) => {
-            console.log("Pret souscrit ", res);
 
             if (res.data.isGranted == true) {
              this.$fire({

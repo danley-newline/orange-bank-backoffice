@@ -179,7 +179,6 @@ export default {
 
 
     createNewPack(){
-      console.log("ok");
       this.initPacks()
       this.showPackModal = true;
       this.formAction = "for-creation";
@@ -193,7 +192,6 @@ export default {
     },
 
     userDateToParse(e){
-      console.log("LES DATES ", e);
     },
 
     initPacks(){

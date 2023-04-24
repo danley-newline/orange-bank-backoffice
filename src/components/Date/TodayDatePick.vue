@@ -35,7 +35,6 @@ components:{
   methods:{
       showMyDate(e){
          
-          console.log("salutok ",e)
       },
       
   }

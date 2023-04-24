@@ -171,7 +171,6 @@ export default {
   },
   methods: {
     checkLinkClass(e) {
-      // console.log("voir les elmen", e)
       this.WhichActiveIcon = e;
     },
     callShowConf() {
@@ -194,11 +193,9 @@ export default {
       var currentTime = Date.now();
       // VERIFICATION TEMPS D'INACTIVITÉ SUPERIEUR AU TEMPS LIMIT AVANT DECONNECTION
       if (currentTime - this.lastActiveTime > this.LogoutTimeOut) {
-        // console.log("boom il a depassé le temps , deconnectez le !")
         this.logoutUser();
       }
 
-      // console.log("Service destruction", this.lastActiveTime)
     },
   },
 

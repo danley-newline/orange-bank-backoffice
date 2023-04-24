@@ -69,8 +69,6 @@ export default {
         axios
           .post("/auth/login", this.userLog)
           .then((data) => {
-            console.log("UserLog", data);
-
             if (data.status === 200) {
 
               localStorage.setItem("token", data.data.token);
@@ -90,10 +88,6 @@ export default {
             }
           })
           .catch((error) => {
-
-            // console.log(error);
-            // console.log("FIRST ERROR ", error.response.status); // 401
-
             if (error.response.status == 401 || error.response.status == 404  ) {
               setTimeout(() => {
                 this.showSpiner = false;

@@ -4,7 +4,6 @@
           <div class="left-block d-flex align-items-center">
               <p class="fw-bold">Espaces administrateur</p>
 
-              <!-- <DatePick /> -->
           </div>
           <div class="right-block">
               
@@ -102,7 +101,8 @@ export default {
         username:"",
         email:"",
         password:"",
-      }
+      },
+      formAction: 'for-creation',
     }
   },
   components:{
@@ -115,7 +115,6 @@ export default {
   },
   methods:{
     createNewUser(){
-      console.log("ok");
       this.initUser()
       this.showUserModal = true;
       this.formAction = "for-creation";
@@ -127,7 +126,6 @@ export default {
       this.user = getClickedUser;
       this.formAction = "for-edition";
 
-      console.log("A VOIR colis ", this.user);
     },
 
     initUser(){

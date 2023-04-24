@@ -24,12 +24,10 @@ export default new Vuex.Store({
       
          MutAdminUser(state, payload){
             state.adminUser = payload;
-            // console.log('TOUTES LES VALEUR DU CLIENT ' , state.allClientInfo)
          },
 
          MutLogedUser(state, payload){
             state.logedUser = payload;
-            // console.log('LES GENS BACK MUT ok ok ', state.dashDatas)
          },
 
          mutLogin(state, payload){
@@ -100,12 +98,9 @@ export default new Vuex.Store({
    getUserList({commit}){
       axios.get(`/users`)
       .then((response) => {
-
-         console.log(response.data.data);
          commit("MutAdminUser", response.data.data);
       })
       .catch((error) => {
-         // console.log(error);
          if (error.response.status == 401) {
          commit("mutLogin", false);
          localStorage.clear();

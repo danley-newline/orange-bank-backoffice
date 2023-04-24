@@ -50,9 +50,6 @@ components:{
         if (this.date <= this.tomorrow) {
                this.twoDate.dateStart = this.date;
                this.twoDate.dateEnd = this.tomorrow;
-            //    console.log("la premier date ", this.date);
-            //    console.log("la deuxieme date ", this.tomorrow);
-
                 this.$store.commit("mutTwoDateFiltre", this.twoDate);
                 this.$emit("twoDaysEmited",true)
             
@@ -76,8 +73,6 @@ components:{
         //CONVERT DATE TO YYYY-MM-DD
         this.tomorrow = dateOne.toISOString().split('T')[0];
 
-       
-        // console.log("la date demain ", dateOne.toISOString().split('T')[0]);
       }
   },
   mounted(){

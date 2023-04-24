@@ -259,7 +259,6 @@ export default {
     },
     
   deleteDemande(e){
-    // return console.log("e", e);
 
     this.$confirm("Voulez vous suprimer cette demande ?").then(() => {
       this.show = true;
