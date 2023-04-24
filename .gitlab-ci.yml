@@ -17,7 +17,7 @@ build:
         - master # Only run on deploy branch
     tags:
         - contabo
-        - pcp
+        - obk
 deploy_develop:
     stage: deploy-dev
     image: ubuntu
@@ -40,6 +40,6 @@ deploy_develop:
         - rsync -avz --progress -a -e "ssh" dist/ $SERVER_USER@$SERVER_IP:"$SERVER_ROOT_FRONT_BASE/service-transit.pariscenterplus.com/"
     tags:
         - contabo
-        - pcp
+        - obk
     only:
         - master # Only run on deploy branch

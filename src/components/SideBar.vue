@@ -1,19 +1,19 @@
 <template>
-  <div class="pcp-sidebar">
+  <div class="obk-sidebar">
     <div>
       <div class="py-2 px-2">
-        <div class="logo-pcp" @click="$router.push('/')">
+        <div class="logo-obk" @click="$router.push('/')">
           <img src="../assets/obk/obk_logo.png" width="120px" alt="" />
         </div>
 
         <b-overlay :show="show" rounded="sm" class="product-loader">
           <div
-            class="pcp-links pt-3 mt-5"
-            :class="{ 'no-active-pcp-bg': showConf }"
+            class="obk-links pt-3 mt-5"
+            :class="{ 'no-active-obk-bg': showConf }"
             @click="showConf = false"
           >
             <div
-              class="pcp-liens"
+              class="obk-liens"
               :class="{ 'is-for-current-nav-childreen': WhichActiveIcon == i }"
               v-for="(item, i) in navlinks"
               :key="i"
@@ -54,7 +54,7 @@
           <div v-if="showConf">
             <div class="conf-child">
               <div
-                class="pcp-liens"
+                class="obk-liens"
                 :class="{
                   'is-for-current-nav-childreen': WhichActiveIcon == i,
                 }"
@@ -229,7 +229,7 @@ export default {
 //       }
 //ANIMATION AFFICHAGE TEXT SIDEBAR
 .not-colapsed-sidebar {
-  .pcp-sidebar {
+  .obk-sidebar {
     width: 240px !important;
     //  transition: 0.5s ease;
   }
@@ -260,19 +260,19 @@ export default {
 .colapsed-sidebar {
   width: 100px !important;
 
-  .pcp-sidebar {
+  .obk-sidebar {
     width: 100px;
     transition: 0.5s ease;
   }
 
-  .logo-pcp {
+  .logo-obk {
     text-align: center;
     img {
       width: 70px;
     }
   }
 
-  .pcp-liens,
+  .obk-liens,
   .logout-liens,
   .block-conf {
     text-align: center;
@@ -283,12 +283,12 @@ export default {
   }
 }
 
-.pcp-sidebar {
+.obk-sidebar {
   position: fixed;
   height: 100vh;
   background: #fff;
 
-  .pcp-liens {
+  .obk-liens {
     margin-top: 1rem;
 
     a.router-link-exact-active.router-link-active,
@@ -304,8 +304,8 @@ export default {
     }
   }
 
-  .no-active-pcp-bg {
-    .pcp-liens {
+  .no-active-obk-bg {
+    .obk-liens {
       a.router-link-exact-active.router-link-active,
       &.is-for-current-nav-childreen a {
         background: none !important;
@@ -318,7 +318,7 @@ export default {
     }
   }
 
-  .pcp-liens,
+  .obk-liens,
   .logout-liens {
     a {
       font-size: 13px;
@@ -362,7 +362,7 @@ export default {
     }
   }
 
-  .logo-pcp {
+  .logo-obk {
     text-align: center;
     margin: 30px auto;
 
@@ -380,7 +380,7 @@ export default {
   }
 }
 
-.pcp-links .pcp-liens:last-child {
+.obk-links .obk-liens:last-child {
   .side-light-img {
     filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(1303%) hue-rotate(4deg) brightness(98%) contrast(99%);
   }

@@ -9,9 +9,6 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  /*plugins: [new HtmlWebpackPlugin({
-    title: "PCP Import-Export App"
-  })],*/
   module: {
     rules: [
       {
