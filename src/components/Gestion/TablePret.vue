@@ -41,6 +41,7 @@
               class="product-table"
               :filter="filter"
               :current-page="currentPage"
+
             >
 
 
@@ -130,10 +131,10 @@
               
 
               <b-pagination
-             
-              @change="showLoader"
+             @change="showLoader"
                 v-model="currentPage"
                 :total-rows="rows"
+                :per-page="perPage"
                 class="mb-0"
               ></b-pagination>
             </div>
@@ -153,16 +154,18 @@ export default {
   props:["Periode","TableDatas"],
   data() {
     return {
-      show: false,
+
+      perPage: 1,
       currentPage: 1,
+      rows: 3,
+
+      show: false,
       colisIsSubmit:false,
       filterTab:'',
-      rows: 1,
       allInfo:{},
       TableData:[],
       periodeDate:{},
       filter: null,
-      listActive:0,
       
 
       fields: [
@@ -254,8 +257,8 @@ export default {
 
 
     onFiltered(filteredItems) {
-      // this.rows = filteredItems.length;
-      // this.currentPage = 1;
+      this.rows = filteredItems.length;
+      this.currentPage = 1;
     },
     
   deleteDemande(e){

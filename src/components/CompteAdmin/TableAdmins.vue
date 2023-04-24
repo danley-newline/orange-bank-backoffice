@@ -110,6 +110,8 @@
               @change="showLoader"
                 v-model="currentPage"
                 :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
                 class="mb-0"
               ></b-pagination>
             </div>
@@ -130,10 +132,14 @@ export default {
   data() {
     return {
       show: false,
+
+      perPage: 1,
       currentPage: 1,
+      rows: 3,
+
+
       colisIsSubmit:false,
       filterTab:'',
-      rows: 1,
       allInfo:{},
       TableData:[],
       periodeDate:{},
